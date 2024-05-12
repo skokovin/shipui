@@ -1,0 +1,142 @@
+@if (browser_support) {
+  <div id="root" class="container-fluid w-100 h-100 m-0 p-0">
+
+    <app-slider #slider style="width: 1000px;"></app-slider>
+    <app-dim #dim style="width: 200px;"></app-dim>
+    <app-game-mode #game style="width: 400px;"></app-game-mode>
+    <app-transparent #transparent style="width: 1000px;"></app-transparent>
+
+    <ul id="header" role="menubar" class="can-hover">
+      <li role="menuitem" tabindex="0" aria-haspopup="true">
+        File
+        <ul role="menu">
+          <li role="menuitem">
+            <a href="#menubar">
+              Load HULL <span>Ctrl+H</span>
+            </a>
+          </li>
+
+          <li role="menuitem">
+            <a href="#menubar">
+              Test Load CabNodes <span>Ctrl+H</span>
+            </a>
+          </li>
+
+          <li role="menuitem">
+            <a href="#menubar">
+              Change MOde <span>Ctrl+O</span>
+            </a>
+          </li>
+          <li role="menuitem">
+            <a href="#menubar">
+              Save <span>Ctrl+S</span>
+            </a>
+          </li>
+          <li role="menuitem" class="has-divider">
+            <a href="#menubar">
+              Save As... <span>Ctrl+Shift+S</span>
+            </a>
+          </li>
+          <li role="menuitem"><a href="#menubar">Exit</a></li>
+        </ul>
+      </li>
+      <li role="menuitem" tabindex="0" aria-haspopup="true">
+        Edit
+        <ul role="menu">
+          <li role="menuitem"><a href="#menubar">Undo</a></li>
+          <li role="menuitem"><a href="#menubar">Copy</a></li>
+          <li role="menuitem"><a href="#menubar">Cut</a></li>
+          <li role="menuitem" class="has-divider"><a href="#menubar">Paste</a></li>
+          <li role="menuitem"><a href="#menubar">Delete</a></li>
+          <li role="menuitem"><a href="#menubar">Find...</a></li>
+          <li role="menuitem"><a href="#menubar">Replace...</a></li>
+          <li role="menuitem"><a href="#menubar">Go to...</a></li>
+        </ul>
+      </li>
+      <li role="menuitem" tabindex="0" aria-haspopup="true">
+        View
+        <ul role="menu">
+          <li role="menuitem" tabindex="0" aria-haspopup="true">
+            Zoom
+            <ul role="menu">
+              <li role="menuitem">
+                <button>Zoom In</button>
+              </li>
+              <li role="menuitem">
+                <button>Zoom Out</button>
+              </li>
+            </ul>
+          </li>
+          <li role="menuitem"><a href="#menubar">Status Bar</a></li>
+          <li role="menuitem"><a (click)="openSlider()" href="#menubar">Slider</a></li>
+        </ul>
+      </li>
+      <li role="menuitem" tabindex="0" aria-haspopup="true">
+        Help
+        <ul role="menu">
+          <li role="menuitem"><a href="#menubar">View Help</a></li>
+          <li role="menuitem"><a href="#menubar">About</a></li>
+        </ul>
+      </li>
+
+      <li (click)="openSlider()" matTooltip="Show Sliders" role="menuitem" tabindex="0" aria-haspopup="true">
+        <i class="bi bi-sliders2"></i>
+      </li>
+      <li (click)="reset_sliders()" matTooltip="Reset Sliders" role="menuitem" tabindex="0" aria-haspopup="true">
+        <i class="bi bi-x-diamond"></i>
+      </li>
+      <li (click)="reset_camera()" matTooltip="Reset Position" role="menuitem" tabindex="0" aria-haspopup="true">
+        <i class="bi bi-bullseye"></i>
+      </li>
+      <li (click)="enable_dimensioning()" matTooltip="Linear Dimensioning" role="menuitem" tabindex="0"
+          aria-haspopup="true">
+        <i class="bi bi-aspect-ratio-fill ms-2"></i>
+      </li>
+      <li (click)="show_game_mode_dialogue()" matTooltip="Game Mode" role="menuitem" tabindex="0" aria-haspopup="true">
+        <i class="bi bi-controller ms-2"></i>
+      </li>
+      <li (click)="show_transparent_dialogue()" matTooltip="Transparency" role="menuitem" tabindex="0"
+          aria-haspopup="true">
+        <i class="bi bi-transparency ms-2"></i>
+      </li>
+
+    </ul>
+    <div id="content" class="window-body has-space m-0 p-0">
+      @if (!is_3d_ready) {
+        <div class="container-fluid  w-100 m-0 p-0">
+          <mat-card class="card">
+            <mat-card-content>
+              <h1>See <a target=”_blank” href="https://www.youtube.com/watch?v=E0fKqEAThts">video instructions</a> on YouTube </h1>
+              <h1>It will download {{ Math.ceil(tot_bytes / 1024 / 1024) }} Mb. Please wait...</h1>
+              <h2>Loaded {{ Math.ceil(progress / 1024 / 1024) }} Mb.</h2>
+              <h2>Unpacked {{ unpacked }} of 16.</h2>
+              <h2>Passed to GPU {{ tot_gpu_packs }} of 4 parts</h2>
+              <section>
+                <mat-progress-bar mode="determinate" [value]="(progress *100)/tot_bytes"></mat-progress-bar>
+              </section>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      }
+
+      <div class="container-fluid h-100 w-100 m-0 p-0">
+        <div class="row h-100 w-100  m-0 p-0">
+          <div class="container-fluid p-0 m-0" #wasm3dwindow id="wasm3dwindow"></div>
+        </div>
+      </div>
+
+    </div>
+    <div id="footer" class="status-bar">
+      <p class="status-bar-field">Press F1 for help </p>
+      <p class="status-bar-field">Slide 1</p>
+      <p class="status-bar-field">CPU Usage: 14%</p>
+    </div>
+
+  </div>
+} @else {
+  <div class="container-fluid w-100 h-100 m-0 p-0 text-center">
+    <h1 class="mt-5">Your browser doesn't support yet, sorry</h1>
+    <h1 class="mt-5">Please use EDGE or CHROME on PC platform.</h1>
+    <h1 class="mt-5">For more info check <a href="https://github.com/gfx-rs/wgpu">this</a>.</h1>
+  </div>
+}

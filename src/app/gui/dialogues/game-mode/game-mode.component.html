@@ -1,0 +1,22 @@
+@if (isVisible) {
+  <div cdkDrag cdkDragRootElement [cdkDragFreeDragPosition]="dialogue_position"
+       class="window active is-bright  m-0 p-0"
+       aria-labelledby="dialog-title" style="user-select: none;">
+    <div cdkDragHandle class="title-bar">
+      <div class="title-bar-text" id="dialog-title">Game Mode</div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" (click)="close_dialogue()"></button>
+      </div>
+    </div>
+    <div class="window-body has-space container-fluid">
+      <div class="row">
+            <h3 class="card-title" style="color: red">PRESS F3 TO EXIT GAME MODE</h3>
+            <p class="card-text">WASD to move</p>
+            <p class="card-text">E/C to jet UP/DOWN</p>
+            <a (click)="go_to_game_mode()" class="btn btn-primary w-25 m-5">GO</a>
+      </div>
+
+    </div>
+
+  </div>
+}

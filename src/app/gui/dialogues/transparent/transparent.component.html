@@ -1,0 +1,37 @@
+@if (isVisible) {
+  <div cdkDrag cdkDragRootElement [cdkDragFreeDragPosition]="slider_dialogue_position"
+       class="window active is-bright  w-100 h-100 m-0 p-0"
+       aria-labelledby="dialog-title" style="user-select: none;">
+    <div cdkDragHandle class="title-bar">
+      <div class="title-bar-text" id="dialog-title">Slider Positions</div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" (click)="close_dialogue()"></button>
+      </div>
+    </div>
+    <div class="window-body has-space container-fluid w-100 h-100 m-0 p-0">
+      <div class="row">
+          <div class="field-row">
+            <label>Hull</label>
+            <input (input)="onSliderHullChanged($event)" type="range" min="0" max="100" step="5"
+                   [(ngModel)]="alfa_hull" [value]="alfa_hull"/>
+          </div>
+      </div>
+    <!--  <div class="row">
+          <div class="field-row">
+            <label>Eq</label>
+            <input (input)="onSliderEqChanged($event)" type="range" min="0" max="100" step="5"
+                   [(ngModel)]="alfa_eq" [value]="alfa_eq"/>
+          </div>
+      </div>
+      <div class="row">
+          <div class="field-row">
+            <label>Pipes</label>
+            <input (input)="onSliderPipesChanged($event)" type="range" min="0" max="100" step="5"
+                   [(ngModel)]="alfa_pipe" [value]="alfa_pipe"/>
+          </div>
+      </div>-->
+
+
+    </div>
+  </div>
+}

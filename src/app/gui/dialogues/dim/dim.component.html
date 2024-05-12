@@ -1,0 +1,37 @@
+@if (isVisible) {
+  <div cdkDrag cdkDragRootElement [cdkDragFreeDragPosition]="dialogue_position"
+       class="window active is-bright  w-100 h-100 m-0 p-0"
+       aria-labelledby="dialog-title" style="user-select: none;">
+    <div cdkDragHandle class="title-bar">
+      <div class="title-bar-text" id="dialog-title">Linear Dimensions</div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" (click)="close_dialogue()"></button>
+      </div>
+    </div>
+    <div class="window-body has-space container-fluid w-100 h-100 ms-0 p-0">
+      <div class="row ms-2">
+        @if (dim_point0.disabled) {
+          Select First Point
+        } @else {
+          Point0 X={{ round(dim_point0.x) }} Y={{ round(dim_point0.y) }} Z={{ round(dim_point0.z) }}
+        }
+
+      </div>
+      <div class="row ms-2">
+        @if (dim_point1.disabled) {
+          Select Second Point
+        } @else {
+          Point1 X={{ round(dim_point1.x) }} Y={{ round(dim_point1.y) }} Z={{ round(dim_point1.z) }}
+        }
+      </div>
+      <div class="row ms-2">
+        @if (dim_point1.disabled) {
+        } @else {
+          D={{ round(dim_point1.dist) }} dX={{ round(delta.x) }} dY={{ round(delta.y) }} dZ={{ round(delta.z) }}
+        }
+      </div>
+
+    </div>
+
+  </div>
+}
